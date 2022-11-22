@@ -2483,6 +2483,13 @@ dot-case@^3.0.4:
     no-case "^3.0.4"
     tslib "^2.0.3"
 
+ecs@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/ecs/-/ecs-0.16.0.tgz#f904d874a146bacfee49a4cd57ebecd37411f089"
+  integrity sha512-44Fx93xDWH4MQ8p6zf1pGIR88z9WJVHEH7zFbibYNnXuhrRQI2UQcsZE8GGao/Xbs2ivb+W1AxHrhhBbgJpuKA==
+  dependencies:
+    remove-array-items "^3.0.0"
+
 ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
@@ -4605,6 +4612,11 @@ relateurl@^0.2.7:
   version "0.2.7"
   resolved "https://registry.yarnpkg.com/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
   integrity sha512-G08Dxvm4iDN3MLM0EsP62EDV9IuhXPR6blNz6Utcp7zyV3tr4HVNINt6MpaRWbxoOHT3Q7YN2P+jaHX8vUbgog==
+
+remove-array-items@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/remove-array-items/-/remove-array-items-3.0.0.tgz#48df24036826d26565641660cbfaf70b5efdff02"
+  integrity sha512-fTZZ7KJr940Rt/CSXTAOCvDNv0FYhdO/hb4RO3cDrqsRUQ8ALUYuSzWLO3I+0TgiIiPk/1UIAQggYodnXyh2RQ==
 
 remove-trailing-separator@^1.0.1:
   version "1.1.0"

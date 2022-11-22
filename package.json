@@ -28,5 +28,8 @@
     "build:prod": "webpack --mode=production --define-process-env-node-env=production",
     "watch": "webpack --watch",
     "serve": "webpack serve"
+  },
+  "dependencies": {
+    "ecs": "^0.16.0"
   }
 }
