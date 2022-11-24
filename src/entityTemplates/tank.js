@@ -1,6 +1,6 @@
 import ECS from 'ecs';
 
-const tankEntityTemplate = (world, entity, { position, scriptable }) => {
+const tankEntityTemplate = (world, entity, { position }) => {
   ECS.addComponentToEntity(world, entity, "position", position);
   ECS.addComponentToEntity(world, entity, "motion", {
     vx: 0,
@@ -20,7 +20,6 @@ const tankEntityTemplate = (world, entity, { position, scriptable }) => {
       ctx.closePath();
     },
   });
-  ECS.addComponentToEntity(world, entity, "scriptable", scriptable);
 };
 
 export default tankEntityTemplate;

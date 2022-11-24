@@ -10,4 +10,4 @@ game.start();
 
 setTimeout(() => {
   game.stop();
-}, 5000);
+}, 10000);

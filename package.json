@@ -30,6 +30,7 @@
     "serve": "webpack serve"
   },
   "dependencies": {
-    "ecs": "^0.16.0"
+    "ecs": "^0.16.0",
+    "uuid": "^9.0.0"
   }
 }

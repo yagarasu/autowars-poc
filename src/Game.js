@@ -2,27 +2,29 @@ import ECS from 'ecs';
 import tankEntityTemplate from './entityTemplates/tank';
 import GraphicsSystem from "./systems/GraphicsSystem";
 import MotionSystem from './systems/MotionSystem';
-import ScriptingSystem from './systems/ScriptingSystem';
+import VirtualMachine from './VirtualMachine';
 
 class Game {
   running = false;
   el = null;
+  vm = null;
   world = null;
   loopId = null;
+  workers = {};
 
   systems = [];
 
   constructor() {
+    this.vm = new VirtualMachine(this);
     this.world = ECS.createWorld();
     this.systems.push(new GraphicsSystem(this));
-    this.systems.push(new ScriptingSystem(this));
     this.systems.push(new MotionSystem(this));
   }
   
   init({
     mountingPoint,
   }) {
-    // TEMP
+    // TEMP >>>
     const p1 = ECS.createEntity(this.world);
     tankEntityTemplate(this.world, p1, {
       position: {
@@ -30,11 +32,17 @@ class Game {
         y: 100,
         a: (45 * Math.PI) / 180,
       },
-      scriptable: {
-        initSrc: 'foo("iiiinit");',
-        loopSrc: "hardware.accelerate();",
-      },
     });
+    this.vm.execute(
+      `
+        console.log('GOGOGO', uuid);
+        setTimeout(() => {
+          exec('UPDATE_ENTITY', [uuid, 'position', { x: 500, y: 500, a: 0 }]);
+        }, 2000);
+      `,
+      p1
+    )
+    // <<<
 
     if (!mountingPoint)
       throw new Error("Unable to mount game. Check mounting point.");
@@ -43,6 +51,7 @@ class Game {
       system.init();
       ECS.addSystem(this.world, () => system);
     }
+
   }
 
   start() {
