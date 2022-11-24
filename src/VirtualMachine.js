@@ -1,5 +1,6 @@
 import ECS from 'ecs';
 import { v4 as uuid } from 'uuid';
+import { clamp, degToRad, unitVectorFromAngle } from './mathUtils';
 
 export const VM_COMMAND_RUN = 'run';
 
@@ -24,16 +25,32 @@ class VirtualMachine {
       command: VM_COMMAND_RUN,
       args: [src, JSON.stringify({ entity, uuid: newUuid })],
     });
+    return newUuid;
+  }
+
+  getEntity(entityUuid) {
+    return this.entities[entityUuid];
   }
 
   handleMessage({ data }) {
-    const { command, args } = data;
+    const { uuid: entityUuid, command, args } = data;
     switch (command) {
-      case 'UPDATE_ENTITY':
-        const [entityUuid, key, value] = args;
-        this.entities[entityUuid][key] = value;
+      case "accelerate": {
+        const [value] = args;
+        const entity = this.getEntity(entityUuid);
+        const [x, y] = unitVectorFromAngle(entity.position.a);
+        entity.motion.vx = clamp(entity.motion.vx + x * value, -10, 10);
+        entity.motion.vy = clamp(entity.motion.vy + y * value, -10, 10);
         ECS.cleanup(this.game.world);
         break;
+      }
+      case "rotate": {
+        const [value] = args;
+        const entity = this.getEntity(entityUuid);
+        entity.position.a = clamp(entity.position.a + value, 0, degToRad(360));
+        ECS.cleanup(this.game.world);
+        break;
+      }
     }
   }
 }

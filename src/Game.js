@@ -30,15 +30,16 @@ class Game {
       position: {
         x: 100,
         y: 100,
-        a: (45 * Math.PI) / 180,
+        a: (0 * Math.PI) / 180,
       },
     });
     this.vm.execute(
       `
         console.log('GOGOGO', uuid);
-        setTimeout(() => {
-          exec('UPDATE_ENTITY', [uuid, 'position', { x: 500, y: 500, a: 0 }]);
-        }, 2000);
+        setInterval(() => {
+          rotate(0.1);
+          accelerate(0.1);
+        }, 1000);
       `,
       p1
     )
